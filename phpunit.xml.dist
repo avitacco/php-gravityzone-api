@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" colors="true" bootstrap="vendor/autoload.php">
+  <php>
+    <ini name="xdebug.mode" value="coverage" />
+  </php>
   <coverage processUncoveredFiles="true">
     <include>
       <directory suffix=".php">./src</directory>
     </include>
     <report>
-      <html outputDirectory="/tmp/kb-content-code-coverage"/>
+      <html outputDirectory="./coverage"/>
     </report>
   </coverage>
   <testsuites>
