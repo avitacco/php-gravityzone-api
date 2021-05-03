@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a0a35704c9a75afe74538fdceff0b16",
+    "content-hash": "4a9b3af6a7d62d4bdb1cb510016fe1c9",
     "packages": [
+        {
+            "name": "datto/json-rpc",
+            "version": "6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/datto/php-json-rpc.git",
+                "reference": "ad4d735f48d80c6b53f7405e5007d97c996533f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/datto/php-json-rpc/zipball/ad4d735f48d80c6b53f7405e5007d97c996533f6",
+                "reference": "ad4d735f48d80c6b53f7405e5007d97c996533f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Datto\\JsonRpc\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Spencer Mortensen",
+                    "email": "smortensen@datto.com",
+                    "homepage": "http://spencermortensen.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Fully unit-tested JSON-RPC 2.0 for PHP",
+            "homepage": "http://datto.com",
+            "keywords": [
+                "json",
+                "json-rpc",
+                "jsonrpc",
+                "php",
+                "php-json-rpc",
+                "rpc"
+            ],
+            "support": {
+                "issues": "https://github.com/datto/php-json-rpc/issues",
+                "source": "https://github.com/datto/php-json-rpc/tree/6.1.0"
+            },
+            "time": "2020-02-28T23:54:06+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "7.3.0",

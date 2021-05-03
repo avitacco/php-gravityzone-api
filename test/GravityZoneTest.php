@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace IndianaUniversity\GravityZone\Test;
@@ -27,14 +28,14 @@ class GravityZoneTest extends TestCase
             'example api key',
             $handlerStack
         );
-        $gz->get('test');
+        $gz->request('test');
 
         $this->assertCount(1, $container);
 
         $transaction = $container[0];
         $this->assertEquals(
             base64_encode('example api key:'),
-            explode(' ', $transaction['request']->getHeaders()['Auth'][0])[1]
+            explode(' ', $transaction['request']->getHeaders()['Authorization'][0])[1]
         );
 
         $this->assertTrue(true);

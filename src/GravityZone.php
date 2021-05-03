@@ -5,6 +5,7 @@ namespace IndianaUniversity\GravityZone;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use IndianaUniversity\GravityZone\Traits\QuarantineTrait;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -12,6 +13,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GravityZone
 {
+    use QuarantineTrait;
+
     /**
      * @var Client
      */
@@ -26,9 +29,10 @@ class GravityZone
     public function __construct(string $host, string $apiKey, HandlerStack $handler = null)
     {
         $this->client = new Client([
-            'base_uri' => "https://$host/api/v1.0/jsonrpc",
+            'base_uri' => "https://$host/api/v1.0/jsonrpc/",
             'headers' => [
-                'Auth' => 'Basic ' . base64_encode("$apiKey:"),
+                'Authorization' => 'Basic ' . base64_encode("$apiKey:"),
+                'Content-Type' => 'application/json',
             ],
             'handler' => $handler,
         ]);
@@ -40,9 +44,8 @@ class GravityZone
      * @return ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function get(string $path, array $params = []): ResponseInterface
+    public function request(string $path, array $params = []): ResponseInterface
     {
-        return $this->client->get($path, $params);
+        return $this->client->post($path, $params);
     }
-
 }
