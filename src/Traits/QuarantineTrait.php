@@ -14,7 +14,8 @@ trait QuarantineTrait
         string $endpointId = null,
         int $page = 1,
         int $perPage = 30,
-        array $filters = []
+        array $filters = [],
+        ?string $id = null
     ): ResponseInterface {
         // I hate doing this here, but if you pass the values as nulls to the
         // api it errors. Need to pass only set params.
@@ -31,7 +32,7 @@ trait QuarantineTrait
 
         $client = new Client();
         $client->query(
-            uniqid('', true),
+            $id ?? uniqid('', true),
             'getQuarantineItemsList',
             $params
         );
@@ -42,4 +43,6 @@ trait QuarantineTrait
             ]
         );
     }
+
+    abstract public function request(string $service, array $params): ResponseInterface;
 }
