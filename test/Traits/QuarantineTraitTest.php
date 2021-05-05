@@ -12,7 +12,11 @@ class QuarantineTraitTest extends TestCase
     public function testGetQuarantineItemsList()
     {
         $mock = $this->getMockForTrait(QuarantineTrait::class);
-        $mock->expects($this->any())
+
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('1'));
+        $mock->expects($this->once())
             ->method('request')
             ->with('quarantine/computers', [
                 'json' => [
@@ -42,13 +46,9 @@ class QuarantineTraitTest extends TestCase
             'endpointID',
             1,
             30,
-            ['actionStatus' => 0],
-            '1'
+            ['actionStatus' => 0]
         );
 
-        $this->assertInstanceOf(
-            Response::class,
-            $actual
-        );
+        $this->assertIsString(($actual));
     }
 }

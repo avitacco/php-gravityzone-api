@@ -6,14 +6,17 @@ namespace IndianaUniversity\GravityZone;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use IndianaUniversity\GravityZone\Traits\AccountsTrait;
 use IndianaUniversity\GravityZone\Traits\QuarantineTrait;
 use Psr\Http\Message\ResponseInterface;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class GravityZone
  */
 class GravityZone
 {
+    use AccountsTrait;
     use QuarantineTrait;
 
     /**
@@ -40,8 +43,18 @@ class GravityZone
     }
 
     /**
+     * Get a new Time-Based UUID for a request.
+     * This is here so it can be mocked with a more predictable output in tests
+     * @return string
+     */
+    public function getId(): string
+    {
+        return Uuid::uuid1()->toString();
+    }
+
+    /**
      * @param string $path
-     * @param array $params
+     * @param array<string, mixed> $params
      * @return ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
