@@ -11,6 +11,11 @@ trait AccountsTrait
 {
     protected string $path = 'accounts';
 
+    /**
+     * @param int $page
+     * @param int $perPage
+     * @return string
+     */
     public function getAccountsList(int $page = 1, int $perPage = 30): string
     {
         $params = [
