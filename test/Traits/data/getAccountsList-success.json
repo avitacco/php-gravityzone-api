@@ -1,0 +1,48 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc": "2.0",
+    "result": {
+        "total": 2,
+        "page": 1,
+        "perPage": 20,
+        "pagesCount": 1,
+        "items": [
+            {
+                "id": "585d3170aaed70b7048b4633",
+                "userName": "client",
+                "email": "client@bitdefender.com",
+                "profile": {
+                    "fullName": "Bitdefender User",
+                    "language": "en_US",
+                    "timezone": "Europe/Bucharest"
+                },
+                "role": 5,
+                "rights": {
+                    "companyManager": false,
+                    "manageCompanies": false,
+                    "manageNetworks": true,
+                    "manageReports": true,
+                    "manageUsers": true
+                }
+            },
+            {
+                "id": "585d3170aaed70b7048b4633",
+                "userName": "client2",
+                "email": "client2@bitdefender.com",
+                "profile": {
+                    "fullName": "Bitdefender User",
+                    "language": "en_US",
+                    "timezone": "Europe/Bucharest"
+                },
+                "role": 1,
+                "rights": {
+                    "companyManager": true,
+                    "manageCompanies": false,
+                    "manageNetworks": true,
+                    "manageReports": true,
+                    "manageUsers": true
+                }
+            }
+        ]
+    }
+}

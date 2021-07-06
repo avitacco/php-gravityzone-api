@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @copyright 2021 The Trustees of Indiana University
+ * @license BSD-3-Clause
+ */
+
 declare(strict_types=1);
 
 namespace IndianaUniversity\GravityZone\Test;
@@ -39,5 +44,15 @@ class GravityZoneTest extends TestCase
         );
 
         $this->assertTrue(true);
+    }
+
+    public function testGetId()
+    {
+        $gz = new GravityZone(
+            'gravityzone.example.net',
+            'example api key'
+        );
+
+        $this->assertIsString($gz->getId());
     }
 }
