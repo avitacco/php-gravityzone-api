@@ -12,6 +12,9 @@ namespace IndianaUniversity\GravityZone\Traits;
 use Datto\JsonRpc\Client;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Trait AccountsTrait
+ */
 trait AccountsTrait
 {
     protected string $path = 'accounts';
@@ -43,19 +46,136 @@ trait AccountsTrait
         )->getBody()->getContents();
     }
 
-    public function deleteAccount(): string
+    /**
+     * @param string $accountId
+     */
+    public function deleteAccount(string $accountId): void
     {
-        return 'Fill this function';
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'deleteAccount',
+            [
+                'accountId' => $accountId
+            ]
+        );
+
+        $this->request(
+            $this->path,
+            [
+                'json' => $client->preEncode()
+            ]
+        )->getBody()->getContents();
+
+        return;
     }
 
-    public function createAccount(): string
-    {
-        return 'Fill this function';
+    /**
+     * @param string $email
+     * @param string $userName
+     * @param array $profile
+     * @param string|null $password
+     * @param int|null $role
+     * @param array|null $rights
+     * @param array|null $targetIds
+     * @return string
+     */
+    public function createAccount(
+        string $email,
+        string $userName,
+        array $profile,
+        string $password = null,
+        int $role = null,
+        array $rights = null,
+        array $targetIds = null
+    ): string {
+        $params = [
+            'email' => $email,
+            'userName' => $userName,
+            'profile' => $profile
+        ];
+
+        foreach (['password', 'role', 'rights', 'targetIds'] as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'createAccount',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                $this->path,
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
-    public function updateAccount(): string
-    {
-        return 'Fill this function';
+    /**
+     * @param string $accountId
+     * @param string|null $email
+     * @param string|null $userName
+     * @param string|null $password
+     * @param array|null $profile
+     * @param int|null $role
+     * @param array|null $rights
+     * @param array|null $targetIds
+     * @return bool
+     */
+    public function updateAccount(
+        string $accountId,
+        string $email = null,
+        string $userName = null,
+        string $password = null,
+        array $profile = null,
+        int $role = null,
+        array $rights = null,
+        array $targetIds = null
+    ): bool {
+        $params = [
+            'accountId' => $accountId
+        ];
+        $optionalParams = [
+            'email',
+            'userName',
+            'password',
+            'profile',
+            'role',
+            'rights',
+            'targetIds',
+        ];
+
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'updateAccount',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                $this->path,
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+        return $response->result;
     }
 
     public function configureNotificationSettings(): string
