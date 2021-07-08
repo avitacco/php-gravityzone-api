@@ -228,4 +228,118 @@ class AccountsTraitTest extends TestCase
             )
         );
     }
+
+    public function testUpdateNotificationsSettings()
+    {
+        $mock = $this->getMockForTrait(AccountsTrait::class);
+
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('5399c9b5-0b46-45e4-81aa-889952433d68'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'accounts',
+                [
+                    'json' => [
+                        'params' => [
+                            'accountId' => '55896b87b7894d0f367b23c8',
+                            'deleteAfter' => 17,
+                            'includeDeviceName' => true,
+                            'includeDeviceFQDN' => true,
+                            'emailAddresses' => ['example1@example.net'],
+                            'notificationsSettings' => [
+                                [
+                                    'type' => 1,
+                                    'enabled' => true,
+                                    'visibilitySettings' => [
+                                        'sendPerEmail' => true,
+                                        'showInConsole' => true,
+                                        'useCustomEmailDistribution' => false,
+                                        'emails' => ['example2@example.com'],
+                                        'logToServer' => true
+                                    ],
+                                    'configurationSettings' => [
+                                        'threshold' => 15,
+                                        'useThreshold' => true
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'configureNotificationsSettings',
+                        'id' => '5399c9b5-0b46-45e4-81aa-889952433d68'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/configureNotificationsSettings-success.json')
+                )
+            ));
+
+        $this->assertTrue(
+            $mock->configureNotificationsSettings(
+                '55896b87b7894d0f367b23c8',
+                17,
+                ['example1@example.net'],
+                true,
+                true,
+                [
+                    [
+                        'type' => 1,
+                        'enabled' => true,
+                        'visibilitySettings' => [
+                            'sendPerEmail' => true,
+                            'showInConsole' => true,
+                            'useCustomEmailDistribution' => false,
+                            'emails' => ['example2@example.com'],
+                            'logToServer' => true
+                        ],
+                        'configurationSettings' => [
+                            'threshold' => 15,
+                            'useThreshold' => true
+                        ]
+                    ]
+                ]
+            )
+        );
+    }
+
+    public function testGetNotificationsSettings()
+    {
+        $mock = $this->getMockForTrait(AccountsTrait::class);
+
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('5399c9b5-0b46-45e4-81aa-889952433d86'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'accounts',
+                [
+                    'json' => [
+                        'params' => [
+                            'accountId' => '55896b87b7894d0f367b23c8'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'getNotificationsSettings',
+                        'id' => '5399c9b5-0b46-45e4-81aa-889952433d86'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/getNotificationsSettings.json')
+                )
+            ));
+
+        $actual = $mock->getNotificationsSettings('55896b87b7894d0f367b23c8');
+        $this->assertIsArray($actual);
+        $this->assertArrayHasKey('deleteAfter', $actual);
+    }
 }

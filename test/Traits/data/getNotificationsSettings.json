@@ -1,0 +1,41 @@
+{
+    "id":"5399c9b5-0b46-45e4-81aa-889952433d86",
+    "jsonrpc":"2.0",
+    "result": {
+        "deleteAfter": 21,
+        "includeDeviceName": true,
+        "includeDeviceFQDN": false,
+        "emailAddresses": [
+            "example1@example.com",
+            "example2@example.com"
+        ],
+        "notificationsSettings":[
+            {
+                "type" : 1,
+                "enabled" : true,
+                "visibilitySettings" : {
+                    "sendPerEmail" : true,
+                    "showInConsole" : true,
+                    "useCustomEmailDistribution": false,
+                    "emails" : [],
+                    "logToServer" : true
+                },
+                "configurationSettings" : {
+                    "threshold" : 5,
+                    "useThreshold" : true
+                }
+            },
+            {
+                "type" : 3,
+                "enabled" : false,
+                "visibilitySettings" : {
+                    "sendPerEmail" : true,
+                    "showInConsole" : true,
+                    "useCustomEmailDistribution": false,
+                    "emails" : [],
+                    "logToServer" : true
+                }
+            }
+        ]
+    }
+}

@@ -84,10 +84,10 @@ trait AccountsTrait
         string $email,
         string $userName,
         array $profile,
-        string $password = null,
-        int $role = null,
-        array $rights = null,
-        array $targetIds = null
+        ?string $password = null,
+        ?int $role = null,
+        ?array $rights = null,
+        ?array $targetIds = null
     ): string {
         $params = [
             'email' => $email,
@@ -133,13 +133,13 @@ trait AccountsTrait
      */
     public function updateAccount(
         string $accountId,
-        string $email = null,
-        string $userName = null,
-        string $password = null,
-        array $profile = null,
-        int $role = null,
-        array $rights = null,
-        array $targetIds = null
+        ?string $email = null,
+        ?string $userName = null,
+        ?string $password = null,
+        ?array $profile = null,
+        ?int $role = null,
+        ?array $rights = null,
+        ?array $targetIds = null
     ): bool {
         $params = [
             'accountId' => $accountId
@@ -178,14 +178,83 @@ trait AccountsTrait
         return $response->result;
     }
 
-    public function configureNotificationSettings(): string
-    {
-        return 'Fill this function';
+    /**
+     * @param string|null $accountId
+     * @param int|null $deleteAfter
+     * @param array|null $emailAddresses
+     * @param bool|null $includeDeviceName
+     * @param bool|null $includeDeviceFQDN
+     * @param array|null $notificationsSettings
+     * @return bool
+     */
+    public function configureNotificationsSettings(
+        ?string $accountId = null,
+        ?int $deleteAfter = null,
+        ?array $emailAddresses = null,
+        ?bool $includeDeviceName = null,
+        ?bool $includeDeviceFQDN = null,
+        ?array $notificationsSettings = null
+    ): bool {
+        $params = [];
+        $optionalParams = [
+            'accountId',
+            'deleteAfter',
+            'emailAddresses',
+            'includeDeviceName',
+            'includeDeviceFQDN',
+            'notificationsSettings',
+        ];
+
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'configureNotificationsSettings',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                $this->path,
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
-    public function getNotificationSettings(): string
-    {
-        return 'Fill this function';
+    public function getNotificationsSettings(
+        ?string $accountId = null
+    ): array {
+        $params = [];
+        if (!is_null($accountId)) {
+            $params['accountId'] = $accountId;
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'getNotificationsSettings',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                $this->path,
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents(),
+        );
+
+        return (array)$response->result;
     }
 
     /**
