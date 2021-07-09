@@ -230,6 +230,10 @@ trait AccountsTrait
         return $response->result;
     }
 
+    /**
+     * @param string|null $accountId
+     * @return array
+     */
     public function getNotificationsSettings(
         ?string $accountId = null
     ): array {

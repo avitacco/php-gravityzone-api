@@ -1,0 +1,50 @@
+{
+    "id":"103d7b05-ec02-481b-9ed6-c07b97de2b7a",
+    "jsonrpc":"2.0",
+    "result": {
+        "page": 2,
+        "pagesCount": 11,
+        "perPage": 2,
+        "total": 22,
+        "items": [
+            {
+                "id" : "21a295eeb1a43d8b497b23b7",
+                "name" : "Computer 21",
+                "type" : 2,
+                "parentId": "21a295eeb1a43d8b497b22b7",
+                "details" : {
+                    "label" : "endpoint 1",
+                    "fqdn": "endpoint1.local",
+                    "groupId": "5a5f4d36b1a43d5f097b23bb",
+                    "isManaged": true,
+                    "machineType": 2,
+                    "operatingSystemVersion": "Windows Server",
+                    "ip": "60.40.10.220",
+                    "macs": [
+                        "324935237335"
+                    ],
+                    "ssid": ""
+                }
+            },
+            {
+                "id" : "21a295eeb1a43d8b497b24b7",
+                "name" : "Computer 22",
+                "type" : 2,
+                "parentId": "21a295eeb1a43d8b497b23b7",
+                "details" : {
+                    "label" : "endpoint 2",
+                    "fqdn": "endpoint2.local",
+                    "groupId": "5a5f4d36b1a43d5f097b23bb",
+                    "isManaged": true,
+                    "machineType": 2,
+                    "operatingSystemVersion": "Windows Server",
+                    "ip": "60.40.10.220",
+                    "macs": [
+                        "324935237346"
+                    ],
+                    "ssid": ""
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc":"2.0",
+    "result": [
+        {
+            "id" : "5582c385b1a43deb7f7b23c6",
+            "name" : "Xen Server"
+        }
+    ]
+}
