@@ -12,6 +12,7 @@ namespace IndianaUniversity\GravityZone;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use IndianaUniversity\GravityZone\Traits\AccountsTrait;
+use IndianaUniversity\GravityZone\Traits\NetworkTrait;
 use IndianaUniversity\GravityZone\Traits\QuarantineTrait;
 use Psr\Http\Message\ResponseInterface;
 use Ramsey\Uuid\Uuid;
@@ -22,6 +23,7 @@ use Ramsey\Uuid\Uuid;
 class GravityZone
 {
     use AccountsTrait;
+    use NetworkTrait;
     use QuarantineTrait;
 
     /**
