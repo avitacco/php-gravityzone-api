@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait NetworkTrait
 {
-    protected string $path = 'network';
+    protected string $networkPath = 'network';
 
     /**
      * @param string $service
@@ -46,7 +46,7 @@ trait NetworkTrait
 
         $response = json_decode(
             $this->request(
-                "{$this->path}/{$service}",
+                "{$this->networkPath}/{$service}",
                 [
                     'json' => $client->preEncode()
                 ]
@@ -97,7 +97,7 @@ trait NetworkTrait
 
         $response = json_decode(
             $this->request(
-                "{$this->path}/{$service}",
+                "{$this->networkPath}/{$service}",
                 [
                     'json' => $client->preEncode()
                 ]
@@ -141,7 +141,7 @@ trait NetworkTrait
 
         $response = json_decode(
             $this->request(
-                "{$this->path}/{$service}",
+                "{$this->networkPath}/{$service}",
                 [
                     'json' => $client->preEncode()
                 ]
@@ -151,8 +151,46 @@ trait NetworkTrait
         return $response->result;
     }
 
-    public function createReconfigureClientTask()
-    {
+    public function createReconfigureClientTask(
+        string $service,
+        array $targetIds,
+        ?array $scheduler = null,
+        ?array $modules = null,
+        ?array $scanMode = null,
+        ?array $roles = null
+    ): bool {
+        $params = [
+            'targetIds' => $targetIds
+        ];
+        $optionalParams = [
+            'scheduler',
+            'modules',
+            'scanMode',
+            'roles'
+        ];
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'createReconfigureClientTask',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
     public function getScanTasksList()

@@ -105,15 +105,6 @@ class NetworkTraitTest extends TestCase
                 )
             ));
 
-        /**
-         * string $service,
-        ?string $parentId = null,
-        ?array $filters = null,
-        ?int $viewType = null,
-        ?int $page = null,
-        ?int $perPage = null
-         */
-
         $this->assertIsArray(
             $mock->getNetworkInventoryItems(
                 'computers',
@@ -141,7 +132,77 @@ class NetworkTraitTest extends TestCase
 
     public function testCreateReconfigureClientTask()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/computers',
+                [
+                    'json' => [
+                        'params' => [
+                            'targetIds' => [
+                                '5d7244b10ea1de153817c072'
+                            ],
+                            'scheduler' => ['type' => 1],
+                            'modules' => [
+                                'advancedThreatControl' => 1,
+                                'firewall' => 1,
+                                'contentControl' => 1,
+                                'deviceControl' => 1,
+                                'powerUser' => 1,
+                                'encryption' => 1,
+                                'advancedAntiExploit' => 1,
+                                'patchManagement' => 1,
+                                'applicationControl' => 1,
+                                'networkAttackDefense' => 1
+                            ],
+                            'scanMode' => ['type' => 1],
+                            'roles' => [
+                                'relay' => 0,
+                                'exchange' => 0
+                            ]
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'createReconfigureClientTask',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/createReconfigureClientTask-success.json')
+                )
+            ));
 
+        $this->assertTrue(
+            $mock->createReconfigureClientTask(
+                'computers',
+                ['5d7244b10ea1de153817c072'],
+                ['type' => 1],
+                [
+                    'advancedThreatControl' => 1,
+                    'firewall' => 1,
+                    'contentControl' => 1,
+                    'deviceControl' => 1,
+                    'powerUser' => 1,
+                    'encryption' => 1,
+                    'advancedAntiExploit' => 1,
+                    'patchManagement' => 1,
+                    'applicationControl' => 1,
+                    'networkAttackDefense' => 1
+                ],
+                ['type' => 1],
+                [
+                    'relay' => 0,
+                    'exchange' => 0
+                ]
+            )
+        );
     }
 
     public function testMoveCustomGroup()
