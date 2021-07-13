@@ -1,0 +1,47 @@
+{
+    "id":"103d7b05-ec02-481b-9ed6-c07b97de2b7a",
+    "jsonrpc":"2.0",
+    "result": {
+        "page": 2,
+        "pagesCount": 11,
+        "perPage": 5,
+        "total": 54,
+        "items": [
+            {
+                "id" : "21a295eeb1a43d8b497b23b7",
+                "name" : "Endpoint 1",
+                "label" : "endpoint 1",
+                "fqdn": "endpoint1.local",
+                "groupId": "5a5f4d36b1a43d5f097b23bb",
+                "isManaged": true,
+                "machineType": 2,
+                "operatingSystemVersion": "Windows Server 2016",
+                "ip": "60.40.10.220",
+                "macs": [
+                    "324935237335"
+                ],
+                "ssid": "",
+                "managedWithHvi": true,
+                "hviProtectionType": 1,
+                "managedWithBest": true
+            },
+            {
+                "id" : "23a295d8b1a43d7c4a7b23c9",
+                "name" : "Endpoint 2",
+                "label" : "endpoint 2",
+                "fqdn": "endpoint2.local",
+                "groupId": "5a4f4d46b1a53d5f197b23aa",
+                "isManaged": true,
+                "machineType": 2,
+                "operatingSystemVersion": "Windows 7",
+                "ip": "60.40.10.221",
+                "macs": [
+                    "325935237445"
+                ],
+                "ssid": "",
+                "managedWithHvi": true,
+                "hviProtectionType": 1
+            }
+        ]
+    }
+}

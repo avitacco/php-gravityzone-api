@@ -19,7 +19,38 @@ class NetworkTraitTest extends TestCase
 
     public function testGetManagedEndpointDetails()
     {
-
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('301f7b05-ec02-481b-9ed6-c07b97de2b7b'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'endpointId' => '54a28b41b1a43d89367b23fd'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'getManagedEndpointDetails',
+                        'id' => '301f7b05-ec02-481b-9ed6-c07b97de2b7b'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/getManagedEndpointDetails-success.json')
+                )
+            ));
+        $this->assertIsArray(
+            $mock->getManagedEndpointDetails(
+                'virtualmachines',
+                '54a28b41b1a43d89367b23fd'
+            )
+        );
     }
 
     public function testGetContainers()
@@ -122,12 +153,82 @@ class NetworkTraitTest extends TestCase
 
     public function testDeleteCustomGroup()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'groupId' => '559bd17ab1a43d241b7b23c6',
+                            'force' => true
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'deleteCustomGroup',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/deleteCustomGroup-success.json')
+                )
+            ));
 
+        $this->assertNull(
+            $mock->deleteCustomGroup(
+                'virtualmachines',
+                '559bd17ab1a43d241b7b23c6',
+                true
+            )
+        );
     }
 
     public function testCreateCustomGroup()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
 
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('9600512e-4e89-438a-915d-1340c654ae34'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'groupName' => 'myGroup',
+                            'parentId' => '5582c0acb1a43d9f7f7b23c6'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'createCustomGroup',
+                        'id' => '9600512e-4e89-438a-915d-1340c654ae34'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/createCustomGroup-success.json')
+                )
+            ));
+
+        $this->assertEquals(
+            '5582c210b1a43d967f7b23c6',
+            $mock->createCustomGroup(
+                'virtualmachines',
+                'myGroup',
+                '5582c0acb1a43d9f7f7b23c6'
+            )
+        );
     }
 
     public function testCreateReconfigureClientTask()
@@ -207,12 +308,78 @@ class NetworkTraitTest extends TestCase
 
     public function testMoveCustomGroup()
     {
-
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'groupId' => '559bd17ab1a43d241b7b23c6',
+                            'parentId' => '559bd17ab1a85d241b7b23c6'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'moveCustomGroup',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/moveCustomGroup-success.json')
+                )
+            ));
+        $this->assertNull(
+            $mock->moveCustomGroup(
+                'virtualmachines',
+                '559bd17ab1a43d241b7b23c6',
+                '559bd17ab1a85d241b7b23c6'
+            )
+        );
     }
 
     public function testSetEndpointLabel()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network',
+                [
+                    'json' => [
+                        'params' => [
+                            'endpointId' => '5a30e7730041d70cc09f244b',
+                            'label' => 'label with url http://test.com?a=12&b=wow'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'setEndpointLabel',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/setEndpointLabel-success.json')
+                )
+            ));
 
+        $this->assertTrue(
+            $mock->setEndpointLabel(
+                '5a30e7730041d70cc09f244b',
+                'label with url http://test.com?a=12&b=wow'
+            )
+        );
     }
 
     public function testCreateScanTaskByMac()
@@ -222,17 +389,142 @@ class NetworkTraitTest extends TestCase
 
     public function testDeleteEndpoint()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'endpointId' => '559bd152b1a43d291b7b23d8'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'deleteEndpoint',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/deleteEndpoint-success.json')
+                )
+            ));
 
+        $this->assertNull(
+            $mock->deleteEndpoint(
+                'virtualmachines',
+                '559bd152b1a43d291b7b23d8'
+            )
+        );
     }
 
     public function testGetEndpointsList()
     {
-
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('103d7b05-ec02-481b-9ed6-c07b97de2b7a'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'parentId' => '23b19c39b1a43d89367b32ce',
+                            'page' => 2,
+                            'perPage' => 5,
+                            'filters' => [
+                                'security' => [
+                                    'management' => [
+                                        'managedWithBest' => true,
+                                        'managedRelays' => true,
+                                    ]
+                                ]
+                            ]
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'getEndpointsList',
+                        'id' => '103d7b05-ec02-481b-9ed6-c07b97de2b7a'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/getEndpointsList-success.json')
+                )
+            ));
+        $this->assertIsArray(
+            $mock->getEndpointsList(
+                'virtualmachines',
+                '23b19c39b1a43d89367b32ce',
+                null,
+                null,
+                2,
+                5,
+                [
+                    'security' => [
+                        'management' => [
+                            'managedWithBest' => true,
+                            'managedRelays' => true,
+                        ]
+                    ]
+                ]
+            )
+        );
     }
 
     public function testMoveEndpoints()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'endpointIds' => [
+                                '559bd152b1a43d291b7b23d8',
+                                '559bd152b1a43d291b7b2430'
+                            ],
+                            'groupId' => '559bd17ab1a43d241b7b23c6'
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'moveEndpoints',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/moveEndpoints-success.json')
+                )
+            ));
 
+        $this->assertNull(
+            $mock->moveEndpoints(
+                'virtualmachines',
+                [
+                    '559bd152b1a43d291b7b23d8',
+                    '559bd152b1a43d291b7b2430'
+                ],
+                '559bd17ab1a43d241b7b23c6'
+            )
+        );
     }
 
     public function testCreateScanTask()
@@ -294,6 +586,43 @@ class NetworkTraitTest extends TestCase
 
     public function testGetScanTasksList()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/computers',
+                [
+                    'json' => [
+                        'params' => [
+                            'status' => 1,
+                            'page' => 2,
+                            'perPage' => 5
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'getScanTasksList',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/getScanTasksList-success.json')
+                )
+            ));
 
+        $this->assertIsArray(
+            $mock->getScanTasksList(
+                'computers',
+                null,
+                1,
+                2,
+                5
+            )
+        );
     }
 }

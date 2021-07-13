@@ -151,6 +151,15 @@ trait NetworkTrait
         return $response->result;
     }
 
+    /**
+     * @param string $service
+     * @param array $targetIds
+     * @param array|null $scheduler
+     * @param array|null $modules
+     * @param array|null $scanMode
+     * @param array|null $roles
+     * @return bool
+     */
     public function createReconfigureClientTask(
         string $service,
         array $targetIds,
@@ -193,40 +202,325 @@ trait NetworkTrait
         return $response->result;
     }
 
-    public function getScanTasksList()
-    {
+    /**
+     * @param string $service
+     * @param string|null $name
+     * @param int|null $status
+     * @param int|null $page
+     * @param int|null $perPage
+     * @return array
+     */
+    public function getScanTasksList(
+        string $service,
+        ?string $name = null,
+        ?int $status = null,
+        ?int $page = null,
+        ?int $perPage = null
+    ): array {
+        $params = [];
+        $optionalParams = [
+            'name',
+            'status',
+            'page',
+            'perPage'
+        ];
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'getScanTasksList',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return (array)$response->result;
     }
 
-    public function getEndpointsList()
-    {
+    /**
+     * @param string $service
+     * @param string|null $parentId
+     * @param bool|null $isManaged
+     * @param int|null $viewType
+     * @param int|null $page
+     * @param int|null $perPage
+     * @param array|null $filters
+     * @return array
+     */
+    public function getEndpointsList(
+        string $service,
+        ?string $parentId = null,
+        ?bool $isManaged = null,
+        ?int $viewType = null,
+        ?int $page = null,
+        ?int $perPage = null,
+        ?array $filters = null
+    ): array {
+        $params = [];
+        $optionalParams = [
+            'parentId',
+            'isManaged',
+            'viewType',
+            'page',
+            'perPage',
+            'filters'
+        ];
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'getEndpointsList',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return (array)$response->result;
     }
 
-    public function getManagedEndpointDetails()
-    {
+    /**
+     * @param string $service
+     * @param string $endpointId
+     * @return array
+     */
+    public function getManagedEndpointDetails(
+        string $service,
+        string $endpointId
+    ): array {
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'getManagedEndpointDetails',
+            ['endpointId' => $endpointId]
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return (array)$response->result;
     }
 
-    public function createCustomGroup()
-    {
+    /**
+     * @param string $service
+     * @param string $groupName
+     * @param string|null $parentId
+     * @return string
+     */
+    public function createCustomGroup(
+        string $service,
+        string $groupName,
+        ?string $parentId = null
+    ): string {
+        $params = [
+            'groupName' => $groupName
+        ];
+        if (!is_null($parentId)) {
+            $params['parentId'] = $parentId;
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'createCustomGroup',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
-    public function deleteCustomGroup()
-    {
+    /**
+     * @param string $service
+     * @param string $groupId
+     * @param bool|null $force
+     */
+    public function deleteCustomGroup(
+        string $service,
+        string $groupId,
+        ?bool $force = null
+    ): void {
+        $params = [
+            'groupId' => $groupId
+        ];
+        if (!is_null($force)) {
+            $params['force'] = $force;
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'deleteCustomGroup',
+            $params
+        );
+
+        $this->request(
+            "{$this->networkPath}/{$service}",
+            [
+                'json' => $client->preEncode()
+            ]
+        );
+
+        return;
     }
 
-    public function moveCustomGroup()
-    {
+    /**
+     * @param string $service
+     * @param string $groupId
+     * @param string $parentId
+     */
+    public function moveCustomGroup(
+        string $service,
+        string $groupId,
+        string $parentId
+    ): void {
+        $params = [
+            'groupId' =>  $groupId,
+            'parentId' => $parentId
+        ];
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'moveCustomGroup',
+            $params
+        );
+
+        $this->request(
+            "{$this->networkPath}/{$service}",
+            [
+                'json' => $client->preEncode()
+            ]
+        );
+
+        return;
     }
 
-    public function moveEndpoints()
-    {
+    /**
+     * @param string $service
+     * @param array $endpointIds
+     * @param string $groupId
+     */
+    public function moveEndpoints(
+        string $service,
+        array $endpointIds,
+        string $groupId
+    ): void {
+        $params = [
+            'endpointIds' => $endpointIds,
+            'groupId' => $groupId
+        ];
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'moveEndpoints',
+            $params
+        );
+
+        $this->request(
+            "{$this->networkPath}/{$service}",
+            [
+                'json' => $client->preEncode()
+            ]
+        );
+
+        return;
     }
 
-    public function deleteEndpoint()
-    {
+    /**
+     * @param string $service
+     * @param string $endpointId
+     */
+    public function deleteEndpoint(
+        string $service,
+        string $endpointId
+    ): void {
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'deleteEndpoint',
+            ['endpointId' => $endpointId]
+        );
+
+        $this->request(
+            "{$this->networkPath}/{$service}",
+            [
+                'json' => $client->preEncode()
+            ]
+        );
+
+        return;
     }
 
-    public function setEndpointLabel()
-    {
+    /**
+     * @param string $endpointId
+     * @param string $label
+     * @return bool
+     */
+    public function setEndpointLabel(
+        string $endpointId,
+        string $label
+    ): bool {
+        $params = [
+            'endpointId' => $endpointId,
+            'label' => $label
+        ];
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'setEndpointLabel',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                'network',
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
     public function createScanTaskByMac()

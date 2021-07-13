@@ -1,0 +1,24 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc":"2.0",
+    "result": {
+        "page": 2,
+        "pagesCount": 11,
+        "perPage": 5,
+        "total": 54,
+        "items": [
+            {
+                "id" : "21a295eeb1a43d8b497b23b7",
+                "name" : "task 1",
+                "status": 1,
+                "startDate": "2015-08-21T23:48:16"
+            },
+            {
+                "id" : "21a295eeb1a43d8b497b23b8",
+                "name" : "task 2",
+                "status": 1,
+                "startDate": "2015-08-21T10:21:15"
+            }
+        ]
+    }
+}
