@@ -1,0 +1,53 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc": "2.0",
+    "result": {
+        "packageName": "Package",
+        "description": "package description",
+        "language": "en_US",
+        "modules": {
+            "antimalware": 1,
+            "advancedThreatControl": 1,
+            "atc": 1,
+            "firewall": 0,
+            "contentControl": 1,
+            "deviceControl": 0,
+            "powerUser": 0,
+            "applicationControl": 0,
+            "advancedAntiExploit": 0,
+            "encryption": 0,
+            "patchManagement": 0,
+            "networkAttackDefense": 0
+        },
+        "roles": {
+            "relay": 1,
+            "exchange": 0
+        },
+        "scanMode": {
+            "type": 2,
+            "computers": {
+                "main": 1,
+                "fallback": 2
+            },
+            "vms": {
+                "main": 2
+            }
+        },
+        "settings": {
+            "scanBeforeInstall": false,
+            "removeCompetitors": true,
+            "customInstallationPath": "c:\\mypath\\bitdefender",
+            "customGroupId": "5a4dff50b1a43ded0a7b23c8",
+            "vmsCustomGroupId": "5a4dff50b1a43ded0a7b23c7"
+        },
+        "deploymentOptions": {
+            "type": 1,
+            "useCommunicationProxy": true,
+            "proxyServer": "10.12.13.14",
+            "proxyPort": 123,
+            "proxyUsername": "user",
+            "useCustomCommunicationServer": true,
+            "communicationServer": "10.12.13.14"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "id":"103d7b05-ec02-481b-9ed6-c07b97de2b7a",
+    "jsonrpc":"2.0",
+    "result": {
+        "page": 1,
+        "pagesCount": 1,
+        "perPage": 5,
+        "total": 1,
+        "items": [
+            {
+                "id" : "55b8c1bfb1a43dd71071071b",
+                "name" : "Package Test",
+                "type": 3
+            }
+        ]
+    }
+}
