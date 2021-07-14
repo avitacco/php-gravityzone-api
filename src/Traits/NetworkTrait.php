@@ -513,7 +513,7 @@ trait NetworkTrait
 
         $response = json_decode(
             $this->request(
-                'network',
+                $this->networkPath,
                 [
                     'json' => $client->preEncode()
                 ]
@@ -523,12 +523,99 @@ trait NetworkTrait
         return $response->result;
     }
 
-    public function createScanTaskByMac()
-    {
+    /**
+     * @param array $macAddresses
+     * @param int $type
+     * @param string|null $name
+     * @param array|null $customScanSettings
+     * @return bool
+     */
+    public function createScanTaskByMac(
+        array $macAddresses,
+        int $type,
+        ?string $name,
+        ?array $customScanSettings
+    ): bool {
+        $params = [
+            'macAddresses' => $macAddresses,
+            'type' => $type
+        ];
+        $optionalParams = [
+            'name',
+            'customScanSettings'
+        ];
+
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'createScanTaskByMac',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                $this->networkPath,
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
-    public function assignPolicy()
-    {
+    /**
+     * @param string $service
+     * @param array $targetIds
+     * @param bool|null $inheritFromAbove
+     * @param string|null $policyId
+     * @param bool|null $forcePolicyInheritance
+     * @return bool
+     */
+    public function assignPolicy(
+        string $service,
+        array $targetIds,
+        ?bool $inheritFromAbove = null,
+        ?string $policyId = null,
+        ?bool $forcePolicyInheritance = null
+    ): bool {
+        $params = [
+            'targetIds' => $targetIds
+        ];
+        $optionalParams = [
+            'inheritFromAbove',
+            'policyId',
+            'forcePolicyInheritance'
+        ];
+        foreach ($optionalParams as $param) {
+            if (!is_null($$param)) {
+                $params[$param] = $$param;
+            }
+        }
+
+        $client = new Client();
+        $client->query(
+            $this->getId(),
+            'assignPolicy',
+            $params
+        );
+
+        $response = json_decode(
+            $this->request(
+                "{$this->networkPath}/{$service}",
+                [
+                    'json' => $client->preEncode()
+                ]
+            )->getBody()->getContents()
+        );
+
+        return $response->result;
     }
 
     /**

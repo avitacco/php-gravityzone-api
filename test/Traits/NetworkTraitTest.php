@@ -94,7 +94,50 @@ class NetworkTraitTest extends TestCase
 
     public function testAssignPolicy()
     {
-
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network/virtualmachines',
+                [
+                    'json' => [
+                        'params' => [
+                            'targetIds' => [
+                                '56728d66b1a43de92c712346',
+                                '69738d66b1a43de92c712346'
+                            ],
+                            'inheritFromAbove' => false,
+                            'policyId' => '55828d66b1a43de92c712345',
+                            'forcePolicyInheritance' => true
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'assignPolicy',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/assignPolicy-success.json')
+                )
+            ));
+        $this->assertTrue(
+            $mock->assignPolicy(
+                'virtualmachines',
+                [
+                    '56728d66b1a43de92c712346',
+                    '69738d66b1a43de92c712346'
+                ],
+                false,
+                '55828d66b1a43de92c712345',
+                true
+            )
+        );
     }
 
     public function testGetNetworkInventoryItems()
@@ -384,7 +427,60 @@ class NetworkTraitTest extends TestCase
 
     public function testCreateScanTaskByMac()
     {
+        $mock = $this->getMockForTrait(NetworkTrait::class);
+        $mock->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with(
+                'network',
+                [
+                    'json' => [
+                        'params' => [
+                            'macAddresses' => [
+                                '1c67da49e1a1',
+                                '8c67f849e1a8'
+                            ],
+                            'type' => 4,
+                            'name' => 'my scan',
+                            'customScanSettings' => [
+                                'scanDepth' => 1,
+                                'scanPath' => [
+                                    'LocalDrives'
+                                ]
+                            ]
+                        ],
+                        'jsonrpc' => '2.0',
+                        'method' => 'createScanTaskByMac',
+                        'id' => '787b5e36-89a8-4353-88b9-6b7a32e9c87f'
+                    ]
+                ]
+            )
+            ->will($this->returnValue(
+                new Response(
+                    200,
+                    [],
+                    file_get_contents(__dir__ . '/data/createScanTaskByMac-success.json')
+                )
+            ));
 
+        $this->assertTrue(
+            $mock->createScanTaskByMac(
+                [
+                    '1c67da49e1a1',
+                    '8c67f849e1a8'
+                ],
+                4,
+                'my scan',
+                [
+                    'scanDepth' => 1,
+                    'scanPath' => [
+                        'LocalDrives'
+                    ]
+                ]
+            )
+        );
     }
 
     public function testDeleteEndpoint()
