@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait AccountsTrait
 {
-    protected string $path = 'accounts';
+    protected string $accountsPath = 'accounts';
 
     /**
      * @param int $page
@@ -39,7 +39,7 @@ trait AccountsTrait
         );
 
         return $this->request(
-            $this->path,
+            $this->accountsPath,
             [
                 'json' => $client->preEncode(),
             ]
@@ -61,7 +61,7 @@ trait AccountsTrait
         );
 
         $this->request(
-            $this->path,
+            $this->accountsPath,
             [
                 'json' => $client->preEncode()
             ]
@@ -110,7 +110,7 @@ trait AccountsTrait
 
         $response = json_decode(
             $this->request(
-                $this->path,
+                $this->accountsPath,
                 [
                     'json' => $client->preEncode()
                 ]
@@ -169,7 +169,7 @@ trait AccountsTrait
 
         $response = json_decode(
             $this->request(
-                $this->path,
+                $this->accountsPath,
                 [
                     'json' => $client->preEncode()
                 ]
@@ -220,7 +220,7 @@ trait AccountsTrait
 
         $response = json_decode(
             $this->request(
-                $this->path,
+                $this->accountsPath,
                 [
                     'json' => $client->preEncode()
                 ]
@@ -251,7 +251,7 @@ trait AccountsTrait
 
         $response = json_decode(
             $this->request(
-                $this->path,
+                $this->accountsPath,
                 [
                     'json' => $client->preEncode()
                 ]

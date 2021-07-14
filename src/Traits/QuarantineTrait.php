@@ -18,6 +18,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait QuarantineTrait
 {
+    protected string $quarantinePath = 'quarantine';
+
     /**
      * @param string $service Allowed services are 'computers' and 'exchange'
      * @param string|null $endpointId The ID of the computer for which you want to retrieve the quarantined items
@@ -57,7 +59,7 @@ trait QuarantineTrait
         );
 
         return $this->request(
-            "quarantine/$service",
+            "$this->quarantinePath/$service",
             [
                 'json' => $client->preEncode(),
             ]
@@ -85,7 +87,7 @@ trait QuarantineTrait
 
         $response = json_decode(
             $this->request(
-                "quarantine/$service",
+                "$this->quarantinePath/$service",
                 [
                     'json' => $client->preEncode(),
                 ]
@@ -115,7 +117,7 @@ trait QuarantineTrait
 
         $response = json_decode(
             $this->request(
-                "quarantine/$service",
+                "$this->quarantinePath/$service",
                 [
                     'json' => $client->preEncode(),
                 ]
@@ -158,7 +160,7 @@ trait QuarantineTrait
 
         $response = json_decode(
             $this->request(
-                'quarantine/computers',
+                "$this->quarantinePath/computers",
                 [
                     'json' => $client->preEncode()
                 ]
@@ -210,7 +212,7 @@ trait QuarantineTrait
 
         $response = json_decode(
             $this->request(
-                'quarantine/exchange',
+                "$this->quarantinePath/exchange",
                 [
                     'json' => $client->preEncode()
                 ]
