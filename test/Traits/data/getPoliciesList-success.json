@@ -1,0 +1,20 @@
+{
+    "id":"5399c9b5-0b46-45e4-81aa-889952433d86",
+    "jsonrpc":"2.0",
+    "result": {
+        "page": 1,
+        "pagesCount": 2,
+        "perPage": 2,
+        "total": 4,
+        "items": [
+            {
+                "id" : "21a295eeb1a43d8b497b23b7",
+                "name" : "Policy 1"
+            },
+            {
+                "id" : "23a295d8b1a43d7c4a7b23c9",
+                "name" : "Policy 2"
+            }
+        ]
+    }
+}

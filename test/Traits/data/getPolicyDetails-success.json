@@ -1,0 +1,14 @@
+{
+    "id": "47519d2d-92e0-4a1f-b06d-aa458e80f610",
+    "jsonrpc":"2.0",
+    "result": {
+        "id": "5583c480b1a43ddc09712345",
+        "name": "Test",
+        "createdBy": "user@bitdefender.com",
+        "createDate": "2015-06-19T10:27:59",
+        "lastModifyDate": "2015-06-19T10:27:59",
+        "settings": {
+            "key": "value"
+        }
+    }
+}
