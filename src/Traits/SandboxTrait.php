@@ -68,8 +68,7 @@ trait SandboxTrait
         string $sandboxId,
         ?int $page = null,
         ?int $perPage = null
-    ): array
-    {
+    ): array {
         $params = [
             'sandboxId' => $sandboxId
         ];

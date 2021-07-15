@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace IndianaUniversity\GravityZone\Test;
 
-
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\NetworkTrait;
 use PHPUnit\Framework\TestCase;
