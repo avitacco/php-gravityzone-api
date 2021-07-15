@@ -1,0 +1,9 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc": "2.0",
+    "result": {
+        "readyForDownload": true,
+        "allInstancesUrl": "https://YOUR-HOSTNAME/api/v1.0/http/downloadReportZip?reportId=5645cba6f12a9a8c5e8b4748&allInstances=1&serviceType=1",
+        "lastInstanceUrl": "https://YOUR-HOSTNAME/api/v1.0/http/downloadReportZip?reportId=5645cba6f12a9a8c5e8b4748&allInstances=0&serviceType=1"
+    }
+}
