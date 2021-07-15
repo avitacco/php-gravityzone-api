@@ -1,8 +1,16 @@
 {
-    "name": "avitacco/php-gravityzone-api",
+    "name": "indiana-university/php-gravityzone-api",
     "description": "A library to interact with the BitDefender GravityZone REST API",
     "type": "library",
     "license": "BSD-3-Clause",
+    "keywords": [
+        "bitdefender",
+        "gravityzone",
+        "antivirus",
+        "security",
+        "rest",
+        "api"
+    ],
     "autoload": {
         "psr-4": {
             "IndianaUniversity\\GravityZone\\": "src/"
@@ -11,7 +19,8 @@
     "authors": [
         {
             "name": "Anthony Vitacco",
-            "email": "avitacco@iu.edu"
+            "email": "avitacco@iu.edu",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -26,5 +35,14 @@
         "phpstan/phpstan": "^0.12.85",
         "phpunit/phpunit": "^9.5",
         "phpmd/phpmd": "^2.10"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src test",
+        "fix-style": "phpcbf src test",
+        "analyze": "phpstan analyze --level 5 src"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
