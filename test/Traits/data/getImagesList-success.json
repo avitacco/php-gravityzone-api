@@ -1,0 +1,21 @@
+{
+    "id": "91d6430d-bfd4-494f-8d4d-4947406d21a7",
+    "jsonrpc": "2.0",
+    "result": {
+        "page": 1,
+        "pagesCount": 1,
+        "perPage": 20,
+        "total": 1,
+        "items": [
+            {
+                "id": "924cca0d49cc7e350a44502b0bb9026a",
+                "name": "image1",
+                "status": 1,
+                "operatingSystem": "Windows 10",
+                "dateAdded": "2019-01-18T09:20:50",
+                "isDefault": true,
+                "actionInProgress": false
+            }
+        ]
+    }
+}

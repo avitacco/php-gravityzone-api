@@ -1,0 +1,28 @@
+{
+    "id": "91d6430d-bfd4-494f-8d4d-4947406d21a7",
+    "jsonrpc": "2.0",
+    "result": {
+        "page": 1,
+        "pagesCount": 1,
+        "perPage": 20,
+        "total": 1,
+        "items": [
+            {
+                "sandboxId": "5c419e6e26df3d367c49de18",
+                "name": "sandbox1",
+                "ip": "10.10.20.1",
+                "macs": [
+                    "00-14-22-01-23-45"
+                ],
+                "ssid": "",
+                "detonatedSamples": 0,
+                "diskUsage": 250,
+                "installationStatus": 1,
+                "lastSeen": "2019-01-18T11:37:50",
+                "configuredConcurrentDetonations": 0,
+                "maximumConcurrentDetonations": 10,
+                "submissionUrl": "https://10.10.20.1:443/api/v1/upload"
+            }
+        ]
+    }
+}

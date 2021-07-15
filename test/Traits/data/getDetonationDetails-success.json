@@ -1,0 +1,25 @@
+{
+    "id": "787b5e36-89a8-4353-88b9-6b7a32e9c87f",
+    "jsonrpc": "2.0",
+    "result": {
+        "detailsReportUrl":
+        "https://10.10.20.1:443/api/v1/report?report_id=asd",
+        "score": 30,
+        "verdict": 0,
+        "mitreTags": [
+            {
+                "category": "Defense Evasion",
+                "techniques": [
+                    "Modify Registry"
+                ]
+            },
+            {
+                "category": "Persistence",
+                "techniques": [
+                    ".bash_profile and .bashrc",
+                    "Account Manipulation"
+                ]
+            }
+        ]
+    }
+}
