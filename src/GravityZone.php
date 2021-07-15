@@ -16,6 +16,7 @@ use IndianaUniversity\GravityZone\Traits\{
     GeneralTrait,
     NetworkTrait,
     PackagesTrait,
+    PoliciesTrait,
     QuarantineTrait,
     ReportsTrait,
     SandboxTrait
@@ -32,6 +33,7 @@ class GravityZone
     use GeneralTrait;
     use NetworkTrait;
     use PackagesTrait;
+    use PoliciesTrait;
     use QuarantineTrait;
     use ReportsTrait;
     use SandboxTrait;
