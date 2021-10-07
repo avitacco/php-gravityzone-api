@@ -27,7 +27,7 @@ $gz = new GravityZone(
     'your api key goes here'
 );
 
-$quaratinedItems = $gz->getQuarantineItemsList('virtualmachines');
+$quarantinedItems = json_decode($gz->getQuarantineItemsList('computers'));
 foreach ($quarantinedItems as $item) {
     print_r($item);
 }
