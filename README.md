@@ -28,7 +28,7 @@ $gz = new GravityZone(
 );
 
 $quarantinedItems = json_decode($gz->getQuarantineItemsList('computers'));
-foreach ($quarantinedItems as $item) {
+foreach ($quarantinedItems->result->items as $item) {
     print_r($item);
 }
 ```
