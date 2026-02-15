@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -29,6 +30,7 @@ trait ReportsTrait
      * @param array|null $options
      * @param array|null $emailsList
      * @return string
+     * @throws GuzzleException
      */
     public function createReport(
         string $service,
@@ -81,6 +83,7 @@ trait ReportsTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getReportsList(
         string $service,
@@ -125,6 +128,7 @@ trait ReportsTrait
     /**
      * @param string $reportId
      * @return array
+     * @throws GuzzleException
      */
     public function getDownloadLinks(
         string $reportId
@@ -150,6 +154,7 @@ trait ReportsTrait
     /**
      * @param string $reportId
      * @return bool
+     * @throws GuzzleException
      */
     public function deleteReport(
         string $reportId

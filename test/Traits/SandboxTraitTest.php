@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace IndianaUniversity\GravityZone\Test;
+namespace IndianaUniversity\GravityZone\Test\Traits;
 
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\SandboxTrait;
@@ -15,13 +15,16 @@ use PHPUnit\Framework\TestCase;
 
 class SandboxTraitTest extends TestCase
 {
-
     public function testGetImagesList()
     {
-        $mock = $this->getMockForTrait(SandboxTrait::class);
+        $mock = $this->getMockBuilder(SandboxTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('91d6430d-bfd4-494f-8d4d-4947406d21a7'));
+            ->willReturn('91d6430d-bfd4-494f-8d4d-4947406d21a7');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -39,13 +42,13 @@ class SandboxTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getImagesList-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getImagesList(
@@ -58,10 +61,14 @@ class SandboxTraitTest extends TestCase
 
     public function testGetSandboxAnalyzerInstancesList()
     {
-        $mock = $this->getMockForTrait(SandboxTrait::class);
+        $mock = $this->getMockBuilder(SandboxTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('91d6430d-bfd4-494f-8d4d-4947406d21a7'));
+            ->willReturn('91d6430d-bfd4-494f-8d4d-4947406d21a7');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -78,13 +85,13 @@ class SandboxTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getSandboxAnalyzerInstancesList-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getSandboxAnalyzerInstancesList(
@@ -96,10 +103,14 @@ class SandboxTraitTest extends TestCase
 
     public function testGetSubmissionStatus()
     {
-        $mock = $this->getMockForTrait(SandboxTrait::class);
+        $mock = $this->getMockBuilder(SandboxTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -115,13 +126,13 @@ class SandboxTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getSubmissionStatus-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getSubmissionStatus('sp02_1547807011_936_e5')
@@ -130,10 +141,14 @@ class SandboxTraitTest extends TestCase
 
     public function testGetDetonationDetails()
     {
-        $mock = $this->getMockForTrait(SandboxTrait::class);
+        $mock = $this->getMockBuilder(SandboxTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -149,13 +164,13 @@ class SandboxTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getDetonationDetails-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getDetonationDetails('sp02_1547807011_936_e5')

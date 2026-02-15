@@ -11,6 +11,7 @@ namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
 use Datto\JsonRpc\Exceptions\ArgumentException;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -27,10 +28,11 @@ trait QuarantineTrait
      * @param int $perPage The number of items in a page
      * @param array<string, mixed> $filters Filters to be used when querying the quarantine items list
      * @return string The JSON response from the server
+     * @throws GuzzleException
      */
     public function getQuarantineItemsList(
         string $service,
-        string $endpointId = null,
+        ?string $endpointId = null,
         int $page = 1,
         int $perPage = 30,
         array $filters = []
@@ -70,7 +72,7 @@ trait QuarantineTrait
      * @param string $service
      * @param array $quarantineItemsIds
      * @return bool
-     * @throws ArgumentException
+     * @throws ArgumentException|GuzzleException
      */
     public function createRemoveQuarantineItemTask(
         string $service,
@@ -103,7 +105,7 @@ trait QuarantineTrait
     /**
      * @param string $service
      * @return bool
-     * @throws ArgumentException
+     * @throws GuzzleException
      */
     public function createEmptyQuarantineTask(
         string $service
@@ -132,11 +134,11 @@ trait QuarantineTrait
      * @param string|null $locationToRestore
      * @param bool $addExclusionInPolicy
      * @return bool
-     * @throws ArgumentException
+     * @throws ArgumentException|GuzzleException
      */
     public function createRestoreQuarantineItemTask(
         array $quarantineItemsIds,
-        string $locationToRestore = null,
+        ?string $locationToRestore = null,
         bool $addExclusionInPolicy = false
     ): bool {
         $params = [
@@ -180,14 +182,14 @@ trait QuarantineTrait
      * @param string|null $email
      * @param string|null $ewsUrl
      * @return bool
-     * @throws ArgumentException
+     * @throws ArgumentException|GuzzleException
      */
     public function createRestoreQuarantineExchangeItemTask(
         array $quarantineItemsIds,
         string $username,
         string $password,
-        string $email = null,
-        string $ewsUrl = null
+        ?string $email = null,
+        ?string $ewsUrl = null
     ): bool {
         $params = [
             'quarantineItemsIds' => $quarantineItemsIds,

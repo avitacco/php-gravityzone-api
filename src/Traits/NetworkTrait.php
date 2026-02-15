@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -24,6 +25,7 @@ trait NetworkTrait
      * @param string|null $parentId
      * @param int|null $viewType
      * @return array
+     * @throws GuzzleException
      */
     public function getContainers(
         string $service,
@@ -64,6 +66,7 @@ trait NetworkTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getNetworkInventoryItems(
         string $service,
@@ -114,6 +117,7 @@ trait NetworkTrait
      * @param array $customScanSettings
      * @param string|null $name
      * @return bool
+     * @throws GuzzleException
      */
     public function createScanTask(
         string $service,
@@ -159,6 +163,7 @@ trait NetworkTrait
      * @param array|null $scanMode
      * @param array|null $roles
      * @return bool
+     * @throws GuzzleException
      */
     public function createReconfigureClientTask(
         string $service,
@@ -209,6 +214,7 @@ trait NetworkTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getScanTasksList(
         string $service,
@@ -258,6 +264,7 @@ trait NetworkTrait
      * @param int|null $perPage
      * @param array|null $filters
      * @return array
+     * @throws GuzzleException
      */
     public function getEndpointsList(
         string $service,
@@ -306,6 +313,7 @@ trait NetworkTrait
      * @param string $service
      * @param string $endpointId
      * @return array
+     * @throws GuzzleException
      */
     public function getManagedEndpointDetails(
         string $service,
@@ -335,6 +343,7 @@ trait NetworkTrait
      * @param string $groupName
      * @param string|null $parentId
      * @return string
+     * @throws GuzzleException
      */
     public function createCustomGroup(
         string $service,
@@ -371,6 +380,7 @@ trait NetworkTrait
      * @param string $service
      * @param string $groupId
      * @param bool|null $force
+     * @throws GuzzleException
      */
     public function deleteCustomGroup(
         string $service,
@@ -405,6 +415,7 @@ trait NetworkTrait
      * @param string $service
      * @param string $groupId
      * @param string $parentId
+     * @throws GuzzleException
      */
     public function moveCustomGroup(
         string $service,
@@ -437,6 +448,7 @@ trait NetworkTrait
      * @param string $service
      * @param array $endpointIds
      * @param string $groupId
+     * @throws GuzzleException
      */
     public function moveEndpoints(
         string $service,
@@ -468,6 +480,7 @@ trait NetworkTrait
     /**
      * @param string $service
      * @param string $endpointId
+     * @throws GuzzleException
      */
     public function deleteEndpoint(
         string $service,
@@ -494,6 +507,7 @@ trait NetworkTrait
      * @param string $endpointId
      * @param string $label
      * @return bool
+     * @throws GuzzleException
      */
     public function setEndpointLabel(
         string $endpointId,
@@ -529,6 +543,7 @@ trait NetworkTrait
      * @param string|null $name
      * @param array|null $customScanSettings
      * @return bool
+     * @throws GuzzleException
      */
     public function createScanTaskByMac(
         array $macAddresses,
@@ -577,6 +592,7 @@ trait NetworkTrait
      * @param string|null $policyId
      * @param bool|null $forcePolicyInheritance
      * @return bool
+     * @throws GuzzleException
      */
     public function assignPolicy(
         string $service,

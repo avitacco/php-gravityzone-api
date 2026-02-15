@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -23,6 +24,7 @@ trait SandboxTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getSandboxAnalyzerInstancesList(
         ?int $page = null,
@@ -63,6 +65,7 @@ trait SandboxTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getImagesList(
         string $sandboxId,
@@ -104,6 +107,7 @@ trait SandboxTrait
     /**
      * @param string $submissionId
      * @return array
+     * @throws GuzzleException
      */
     public function getSubmissionStatus(
         string $submissionId
@@ -130,6 +134,7 @@ trait SandboxTrait
     /**
      * @param string $submissionId
      * @return array
+     * @throws GuzzleException
      */
     public function getDetonationDetails(
         string $submissionId

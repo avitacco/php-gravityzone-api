@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace IndianaUniversity\GravityZone\Test;
+namespace IndianaUniversity\GravityZone\Test\Traits;
 
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\ReportsTrait;
@@ -15,13 +15,16 @@ use PHPUnit\Framework\TestCase;
 
 class ReportsTraitTest extends TestCase
 {
-
     public function testCreateReport()
     {
-        $mock = $this->getMockForTrait(ReportsTrait::class);
+        $mock = $this->getMockBuilder(ReportsTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -50,13 +53,13 @@ class ReportsTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/createReport-success.json')
                 )
-            ));
+            );
 
         $this->assertEquals(
             '563c78e2b1a43d4043d60413',
@@ -83,10 +86,14 @@ class ReportsTraitTest extends TestCase
 
     public function testGetReportsList()
     {
-        $mock = $this->getMockForTrait(ReportsTrait::class);
+        $mock = $this->getMockBuilder(ReportsTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -104,13 +111,13 @@ class ReportsTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getReportsList-success.json')
                 )
-            ));
+            );
         $this->assertIsArray(
             $mock->getReportsList(
                 'virtualmachines',
@@ -124,10 +131,14 @@ class ReportsTraitTest extends TestCase
 
     public function testGetDownloadLinks()
     {
-        $mock = $this->getMockForTrait(ReportsTrait::class);
+        $mock = $this->getMockBuilder(ReportsTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87g'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87g');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -143,13 +154,14 @@ class ReportsTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getDownloadLinks-ready.json')
                 )
-            ));
+            );
+
         $this->assertIsArray(
             $mock->getDownloadLinks(
                 '5638d7f8b1a43d49137b23c9'
@@ -159,10 +171,14 @@ class ReportsTraitTest extends TestCase
 
     public function testDeleteReport()
     {
-        $mock = $this->getMockForTrait(ReportsTrait::class);
+        $mock = $this->getMockBuilder(ReportsTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87g'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87g');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -178,13 +194,14 @@ class ReportsTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/deleteReport-success.json')
                 )
-            ));
+            );
+
         $this->assertTrue(
             $mock->deleteReport(
                 '5638d7f8b1a43d49137b23c9'

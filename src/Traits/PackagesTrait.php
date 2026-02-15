@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -22,6 +23,7 @@ trait PackagesTrait
     /**
      * @param string|null $packageName
      * @return array
+     * @throws GuzzleException
      */
     public function getInstallationLinks(
         ?string $packageName = null
@@ -54,6 +56,7 @@ trait PackagesTrait
      * @param int|null $page
      * @param int|null $perPage
      * @return array
+     * @throws GuzzleException
      */
     public function getPackagesList(
         ?int $page = null,
@@ -99,6 +102,7 @@ trait PackagesTrait
      * @param array|null $roles
      * @param array|null $deploymentOptions
      * @return array
+     * @throws GuzzleException
      */
     public function createPackage(
         string $packageName,
@@ -149,6 +153,7 @@ trait PackagesTrait
 
     /**
      * @param string $packageId
+     * @throws GuzzleException
      */
     public function deletePackage(
         string $packageId

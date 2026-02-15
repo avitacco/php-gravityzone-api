@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -21,6 +22,7 @@ trait GeneralTrait
 
     /**
      * @return array
+     * @throws GuzzleException
      */
     public function getApiKeyDetails(): array
     {
