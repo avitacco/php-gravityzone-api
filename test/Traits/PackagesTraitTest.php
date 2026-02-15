@@ -1,6 +1,6 @@
 <?php
 
-namespace IndianaUniversity\GravityZone\Test;
+namespace IndianaUniversity\GravityZone\Test\Traits;
 
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\PackagesTrait;
@@ -8,13 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 class PackagesTraitTest extends TestCase
 {
-
     public function testGetPackageDetails()
     {
-        $mock = $this->getMockForTrait(PackagesTrait::class);
+        $mock = $this->getMockBuilder(PackagesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -30,13 +33,13 @@ class PackagesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getPackageDetails-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getPackageDetails('5a37b660b1a43d99117b23c6')
@@ -45,10 +48,14 @@ class PackagesTraitTest extends TestCase
 
     public function testGetPackagesList()
     {
-        $mock = $this->getMockForTrait(PackagesTrait::class);
+        $mock = $this->getMockBuilder(PackagesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('103d7b05-ec02-481b-9ed6-c07b97de2b7a'));
+            ->willReturn('103d7b05-ec02-481b-9ed6-c07b97de2b7a');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -65,13 +72,14 @@ class PackagesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getPackagesList-success.json')
                 )
-            ));
+            );
+
         $this->assertIsArray(
             $mock->getPackagesList(
                 1,
@@ -82,10 +90,14 @@ class PackagesTraitTest extends TestCase
 
     public function testCreatePackage()
     {
-        $mock = $this->getMockForTrait(PackagesTrait::class);
+        $mock = $this->getMockBuilder(PackagesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('426db9bb-e92a-4824-a21b-bba6b62d0a18'));
+            ->willReturn('426db9bb-e92a-4824-a21b-bba6b62d0a18');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -144,13 +156,13 @@ class PackagesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/createPackage-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->createPackage(
@@ -204,10 +216,14 @@ class PackagesTraitTest extends TestCase
 
     public function testGetInstallationLinks()
     {
-        $mock = $this->getMockForTrait(PackagesTrait::class);
+        $mock = $this->getMockBuilder(PackagesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('426db9bb-e92a-4824-a21b-bba6b62d0a18'));
+            ->willReturn('426db9bb-e92a-4824-a21b-bba6b62d0a18');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -223,13 +239,13 @@ class PackagesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getInstallationLinks-success.json')
                 )
-            ));
+            );
         $this->assertIsArray(
             $mock->getInstallationLinks('my package')
         );
@@ -237,10 +253,14 @@ class PackagesTraitTest extends TestCase
 
     public function testDeletePackage()
     {
-        $mock = $this->getMockForTrait(PackagesTrait::class);
+        $mock = $this->getMockBuilder(PackagesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -256,13 +276,13 @@ class PackagesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/deletePackage-success.json')
                 )
-            ));
+            );
         $this->assertNull(
             $mock->deletePackage('5a37b660b1a43d99117b23c6')
         );

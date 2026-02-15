@@ -1,6 +1,6 @@
 <?php
 
-namespace IndianaUniversity\GravityZone\Test;
+namespace IndianaUniversity\GravityZone\Test\Traits;
 
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\PoliciesTrait;
@@ -8,13 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 class PoliciesTraitTest extends TestCase
 {
-
     public function testGetPoliciesList()
     {
-        $mock = $this->getMockForTrait(PoliciesTrait::class);
+        $mock = $this->getMockBuilder(PoliciesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('5399c9b5-0b46-45e4-81aa-889952433d86'));
+            ->willReturn('5399c9b5-0b46-45e4-81aa-889952433d86');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -31,13 +34,13 @@ class PoliciesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getPoliciesList-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getPoliciesList(
@@ -50,10 +53,14 @@ class PoliciesTraitTest extends TestCase
 
     public function testGetPolicyDetails()
     {
-        $mock = $this->getMockForTrait(PoliciesTrait::class);
+        $mock = $this->getMockBuilder(PoliciesTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('47519d2d-92e0-4a1f-b06d-aa458e80f610'));
+            ->willReturn('47519d2d-92e0-4a1f-b06d-aa458e80f610');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -69,13 +76,13 @@ class PoliciesTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getPolicyDetails-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getPolicyDetails(

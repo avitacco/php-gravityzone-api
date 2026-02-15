@@ -1,6 +1,6 @@
 <?php
 
-namespace IndianaUniversity\GravityZone\Test;
+namespace IndianaUniversity\GravityZone\Test\Traits;
 
 use GuzzleHttp\Psr7\Response;
 use IndianaUniversity\GravityZone\Traits\GeneralTrait;
@@ -8,13 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 class GeneralTraitTest extends TestCase
 {
-
     public function testGetApiKeyDetails()
     {
-        $mock = $this->getMockForTrait(GeneralTrait::class);
+        $mock = $this->getMockBuilder(GeneralTraitTestClassForMocking::class)
+            ->onlyMethods(['getId', 'request'])
+            ->getMock();
+
         $mock->expects($this->once())
             ->method('getId')
-            ->will($this->returnValue('787b5e36-89a8-4353-88b9-6b7a32e9c87f'));
+            ->willReturn('787b5e36-89a8-4353-88b9-6b7a32e9c87f');
+
         $mock->expects($this->once())
             ->method('request')
             ->with(
@@ -28,13 +31,13 @@ class GeneralTraitTest extends TestCase
                     ]
                 ]
             )
-            ->will($this->returnValue(
+            ->willReturn(
                 new Response(
                     200,
                     [],
                     file_get_contents(__dir__ . '/data/getApiKeyDetails-success.json')
                 )
-            ));
+            );
 
         $this->assertIsArray(
             $mock->getApiKeyDetails()

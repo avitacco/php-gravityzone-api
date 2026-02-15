@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone\Traits;
 
 use Datto\JsonRpc\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -23,6 +24,7 @@ trait AccountsTrait
      * @param int $page
      * @param int $perPage
      * @return string
+     * @throws GuzzleException
      */
     public function getAccountsList(int $page = 1, int $perPage = 30): string
     {
@@ -48,6 +50,7 @@ trait AccountsTrait
 
     /**
      * @param string $accountId
+     * @throws GuzzleException
      */
     public function deleteAccount(string $accountId): void
     {
@@ -79,6 +82,7 @@ trait AccountsTrait
      * @param array|null $rights
      * @param array|null $targetIds
      * @return string
+     * @throws GuzzleException
      */
     public function createAccount(
         string $email,
@@ -130,6 +134,7 @@ trait AccountsTrait
      * @param array|null $rights
      * @param array|null $targetIds
      * @return bool
+     * @throws GuzzleException
      */
     public function updateAccount(
         string $accountId,
@@ -186,6 +191,7 @@ trait AccountsTrait
      * @param bool|null $includeDeviceFQDN
      * @param array|null $notificationsSettings
      * @return bool
+     * @throws GuzzleException
      */
     public function configureNotificationsSettings(
         ?string $accountId = null,
@@ -233,6 +239,7 @@ trait AccountsTrait
     /**
      * @param string|null $accountId
      * @return array
+     * @throws GuzzleException
      */
     public function getNotificationsSettings(
         ?string $accountId = null

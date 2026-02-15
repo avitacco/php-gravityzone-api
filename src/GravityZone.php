@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace IndianaUniversity\GravityZone;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use IndianaUniversity\GravityZone\Traits\{
     AccountsTrait,
@@ -49,7 +50,7 @@ class GravityZone
      * @param string $apiKey
      * @param HandlerStack|null $handler
      */
-    public function __construct(string $host, string $apiKey, HandlerStack $handler = null)
+    public function __construct(string $host, string $apiKey, ?HandlerStack $handler = null)
     {
         $this->client = new Client([
             'base_uri' => "https://$host/api/v1.0/jsonrpc/",
@@ -75,7 +76,7 @@ class GravityZone
      * @param string $path
      * @param array<string, mixed> $params
      * @return ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function request(string $path, array $params = []): ResponseInterface
     {
