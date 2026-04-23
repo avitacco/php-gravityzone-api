@@ -27,7 +27,7 @@
         "php": "^8",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.10",
-        "datto/json-rpc": "^6.1",
+        "hcs-llc/php-json-rpc": "^7.0",
         "ramsey/uuid": "^4.1"
     },
     "require-dev": {
@@ -42,7 +42,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit --coverage-html coverage --display-deprecations --display-warnings",
+        "test": "XDEBUG_MODE=coverage phpunit --coverage-html coverage --display-deprecations --display-warnings",
         "check-style": "phpcs src test",
         "fix-style": "phpcbf src test",
         "analyze": "phpstan analyze --level 5 src"
@@ -54,5 +54,11 @@
         "branch-alias": {
             "trunk": "1.0-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hcs-llc/php-json-rpc"
+        }
+    ]
 }
