@@ -26,7 +26,7 @@
     "require": {
         "php": "^8",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.14",
+        "guzzlehttp/guzzle": "^8.0",
         "hcs-llc/php-json-rpc": "^7.0",
         "ramsey/uuid": "^4.1"
     },
